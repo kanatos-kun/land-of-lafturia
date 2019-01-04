@@ -3,10 +3,9 @@
 const webpack = require('webpack');
 const path = require('path');
 
-module.exports = {
+let config = {
 
     entry: './src/index.js',
-
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: '/build/',
@@ -21,7 +20,7 @@ module.exports = {
           }
         ]
     },
-
+    devtool:"cheap-module-eval-source-map",
     plugins: [
         new webpack.DefinePlugin({
             'CANVAS_RENDERER': JSON.stringify(true),
@@ -30,3 +29,8 @@ module.exports = {
     ]
 
 };
+//
+// if(config.mode === "development"){
+//             config.devtool="cheap-module-eval-source-map";
+// }
+module.exports = config;

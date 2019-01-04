@@ -1,21 +1,24 @@
 import 'phaser';
+import MenuManager from './scenes/MenuManager';
+import SceneManager from './scenes/SceneManager';
+import MapManager from './scenes/MapManager';
 
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: {
-        preload: preload,
-        create: create
-    }
+    scene: [SceneManager,
+            MenuManager,
+            MapManager
+   ]
 };
 
 var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('logo', 'assets/logo.png');
+    this.load.image('logo', 'assets/sprite/logo.png');
 }
 
 function create ()
