@@ -1,5 +1,3 @@
-
-
 export default class Boot extends Phaser.Scene {
             constructor(){
                         super({key:"Boot"});
@@ -13,7 +11,12 @@ export default class Boot extends Phaser.Scene {
 
                         //spritesheet files
                         this.load.image('logo','assets/sprites/logo.png');
-                        this.load.spritesheet('monsterstimefantasyrpgspritepack_animation3','assets/atlas/monsterstimefantasyrpgspritepack/animation3.png',{
+                        //monstertimefantasy spritesheet
+                        this.load.spritesheet('monsterstimefantasyrpgspritepack_monster1','assets/atlas/monsterstimefantasyrpgspritepack/monster1.png',{
+                                    frameWidth:62,
+                                    frameHeight:64
+                        });
+                        this.load.spritesheet('monsterstimefantasyrpgspritepack_npc6','assets/atlas/monsterstimefantasyrpgspritepack/npc6.png',{
                                     frameWidth:26,
                                     frameHeight:36
                         });
@@ -73,11 +76,37 @@ export default class Boot extends Phaser.Scene {
                                     frameWidth:26,
                                     frameHeight:36
                         });
+                        //superpower spritesheet
+                        this.load.spritesheet('superpower_rpg-battle-system_paladin','assets/atlas/superpower_rpg-battle-system/char/paladin/sprite-sheet-249x100.png',{
+                                    frameWidth:249,
+                                    frameHeight:100
+                        });
+                        this.load.spritesheet('superpower_rpg-battle-system_slime','assets/atlas/superpower_rpg-battle-system/monster/slime/sprite-sheet-141x107.png',{
+                                    frameWidth:141,
+                                    frameHeight:107
+                        });
 
-                        this.load.image('dialogueBox','assets/sprites/dialogueBox.png');
+                        //sprite
+                        this.load.image('tp_image','assets/sprites/15-01-19_tpIcon.png');
 
+                        this.load.image('battleScene_BG','assets/sprites/battleScene_BG.png');
+                        this.load.image('battleScene_healthBar','assets/gui/battleScene_healthBar.png');
+                        this.load.image('battleScene_healthBar2','assets/gui/battleScene_healthBar2.png');
+                        this.load.image('battleScene_healthBarEmpty','assets/gui/battleScene_healthBarEmpty.png');
+                        this.load.image('battleScene_manaBar','assets/gui/battleScene_manaBar.png');
+                        this.load.image('battleScene_manaBar2','assets/gui/battleScene_manaBar2.png');
+                        this.load.image('battleScene_manaBarEmpty','assets/gui/battleScene_manaBarEmpty.png');
+                        this.load.image('battleScene_timeBar','assets/gui/battleScene_timeBar.png');
+                        this.load.image('battleScene_timeBar2','assets/gui/battleScene_timeBar2.png');
+                        this.load.image('battleScene_timeBarEmpty','assets/gui/battleScene_timeBarEmpty.png');
+                        this.load.image('battleScene_UIINFO','assets/gui/battleScene_UIINFO.png');
+                        this.load.image('battleScene_UIINFO2','assets/gui/battleScene_UIINFO2.png');
+                        this.load.image('battleScene_UIINFO3','assets/gui/battleScene_UIINFO3.png');
+                        this.load.image('battleScene_UIINFO4','assets/gui/battleScene_UIINFO4.png');
+                        this.load.image('battleScene_BarEmpty','assets/gui/battleScene_BarEmpty.png');
+                        this.load.image('dialogueBox','assets/gui/dialogueBox.png');
 
-                        //gui
+                        //gui menu
                         this.load.image('newgame_normal','assets/gui/newgame_normal.png');
                         this.load.image('newgame_hover','assets/gui/newgame_hover.png');
                         this.load.image('newgame_click','assets/gui/newgame_click.png');
@@ -87,6 +116,15 @@ export default class Boot extends Phaser.Scene {
                         this.load.image('quit_normal','assets/gui/quit_normal.png');
                         this.load.image('quit_hover','assets/gui/quit_hover.png');
                         this.load.image('quit_click','assets/gui/quit_click.png');
+                        this.load.image('arrow_down',"assets/gui/small_cursor1.png");
+                        this.load.image('arrow_right',"assets/gui/small_cursor2.png");
+
+                        //gui window battleScene
+                        this.load.image('battleScene_window_base','assets/gui/battleScene_window_base.png');
+                        this.load.image('battleScene_window_choiceChange','assets/gui/battleScene_window_choiceChange.png');
+                        this.load.image('battleScene_window_defendre','assets/gui/battleScene_window_defendre.png');
+                        this.load.image('battleScene_window_item','assets/gui/battleScene_window_item.png');
+
                         //tileset
                         this.load.image('tileset_castle','assets/tileset/fantasyrpgtilesetpack/castle.png');
                         this.load.image('tileset_desert','assets/tileset/fantasyrpgtilesetpack/desert.png');
@@ -104,6 +142,7 @@ export default class Boot extends Phaser.Scene {
                         //data
                         //map
                         this.load.tilemapTiledJSON('map_village','assets/data/map/0003 - village01.json');
+                        this.load.tilemapTiledJSON('map_forest01','assets/data/map/0004 - forest01.json');
 
 
 
@@ -127,14 +166,14 @@ export default class Boot extends Phaser.Scene {
 var progress= this.add.graphics();
                         this.load.on('filecomplete',function(key, type, data){
                                     if(key ==="logo" ){
-                                                game.add.image(180,90,'logo').setScale(0.5);
+                                                game.add.image(347,163,'logo');
                                                 progress.depth =2;
                                     }
                         });
                         this.load.on('progress', function (value) {
                                        progress.clear();
                                        progress.fillStyle(0xffffff, 1);
-                                       progress.fillRect(5, 168, 348 * value - 10, 15);
+                                       progress.fillRect(5, 354, 690 * value - 10, 15);
                         });
 
                         this.load.on('complete', function () {
@@ -147,6 +186,7 @@ var progress= this.add.graphics();
 
             create(){
                         console.log("la scene Boot a bien été chargée");
+
                         var m = this.sound.add('bgm_music_bytes_the_retro_adventure',{loop:true});
                         this.add.image(0,0,'monsterstimefantasyrpgspritepack_animation3');
                         m.play();
