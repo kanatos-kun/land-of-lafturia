@@ -34,18 +34,15 @@ export default class MapForest01  extends Phaser.Scene{
                         this.hero.setPosition(heroPosition.x,heroPosition.y);
                         this.physics.add.collider(this.hero,this.layer_collision);
 
-                        this.characters =[
-                                    this.physics.add.sprite(1130,833,"monsterstimefantasyrpgspritepack_monster1",2),
-                                    this.physics.add.sprite(744,322,"monsterstimefantasyrpgspritepack_monster1",2),
-                                    this.physics.add.sprite(512,44,"monsterstimefantasyrpgspritepack_monster1",2)
-                        ];
-
-                        this.characters[0].body.setSize(24,24);
-                        this.characters[1].body.setSize(24,24);
-                        this.characters[2].body.setSize(24,24);
-                        this.characters[0].body.setOffset(10,40);
-                        this.characters[1].body.setOffset(10,40);
-                        this.characters[2].body.setOffset(10,40);
+                        this.characters = this.physics.add.group();
+                        this.characters.create(1130,833,"monsterstimefantasyrpgspritepack_monster1",2);
+                        this.characters.create(744,322,"monsterstimefantasyrpgspritepack_monster1",2);
+                        this.characters.create(744,322,"monsterstimefantasyrpgspritepack_monster1",2);
+                        var char = this.characters.getChildren();
+                        for(let i = 0; i <this.characters.getLength(); i++){
+                                    char[i].body.setSize(24,24);
+                                    char[i].body.setOffset(10,40);
+                        }
                         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
                         this.cameras.main.startFollow(this.hero,true,0.52,0.52);
                         this.cameras.main.setZoom(2);
@@ -60,7 +57,7 @@ export default class MapForest01  extends Phaser.Scene{
                                     information:this.add.text(  this.gameManager.CAM_X,
                                                                 this.gameManager.CAM_Y + 40,"click 'C' for debug tile : " + this.showDebug,{ color: '#ffffff', fontSize:10,fontFamily: "Gadugi"})
                         };
-                        
+
                         this.debugText.heroPositionX.setDepth(999);
                         this.debugText.heroPositionY.setDepth(999);
                         this.debugText.information.setDepth(999);
@@ -74,6 +71,12 @@ export default class MapForest01  extends Phaser.Scene{
                         this.debugText.information.setScale(1);
                         this.debugText.information.setScrollFactor(0);
 
+
+                        this.debugText.heroPositionX.setVisible(false);
+                        this.debugText.heroPositionY.setVisible(false);
+                        this.debugText.information.setVisible(false);
+
+
                         this.debugGraphics = this.add.graphics();
                         this.input.keyboard.on('keydown_C', function (event) {
                               this.showDebug = !this.showDebug;
@@ -81,12 +84,12 @@ export default class MapForest01  extends Phaser.Scene{
                         },this);
 
 
-                        this.physics.add.overlap(this.hero,this.characters[0],function(e1, e2){
-
+                        this.physics.add.overlap(this.hero,this.characters,function(e1, e2){
 
                                     if(Phaser.Input.Keyboard.JustDown(this.spacekey) ) {
                                                 console.log("combat!");
-                                                this.scene.start("BattleScene",{monster:[0,0,0]});
+                                                this.scene.sleep("map_forest01");
+                                                this.scene.run("BattleScene",{monster:[Object.create(this.gameManager.monsterDB[0]) ]});
                                     }
 
                         },function(){},this);

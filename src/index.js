@@ -1,11 +1,15 @@
 import 'phaser';
+// Assuming you use use ES6 imports...
+import { Plugin as NineSlicePlugin } from 'phaser3-nineslice';
 import Boot from './scenes/Boot';
 import MenuManager from './scenes/MenuManager';
 import SceneManager from './scenes/SceneManager';
 import MapManager from './scenes/MapManager';
 import MenuScene from './MenuScene';
 import GameManager from './GameManager';
-import BattleScene from './scenes/battleScene';
+import BattleScene from './scenes/BattleScene';
+import GameOverScene from './scenes/GameOverScene';
+import BattleSceneVictory from './scenes/BattleSceneVictory';
 
 // -----------------------------------------
 //               IMPORTS MAP
@@ -20,6 +24,9 @@ var config = {
     height: 392,
     parent: document.querySelector('id#gameContainer'),
     canvas: document.querySelector('canvas#game'),
+    plugins: {
+                global: [ NineSlicePlugin.DefaultCfg ],
+            },
     scene: [
             Boot,
             MenuScene,
@@ -27,6 +34,8 @@ var config = {
             MenuManager,
             MapManager,
             BattleScene,
+            GameOverScene,
+            BattleSceneVictory,
             //-----map-----
             Mapvillage01,
             MapForest01

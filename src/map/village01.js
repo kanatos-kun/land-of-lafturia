@@ -75,20 +75,50 @@ export default class MapVillage01  extends Phaser.Scene {
                         this.dialogueText.setWordWrapWidth(275);
 
 
-                        this.characters = [
-                                    this.physics.add.sprite(1078,879,"monsterstimefantasyrpgspritepack_npc6",8),
-                                    this.physics.add.sprite(925,495,"monsterstimefantasyrpgspritepack_npc4",2),
-                                    this.physics.add.sprite(951,1117,"monsterstimefantasyrpgspritepack_npc3",50),
-                                    this.physics.add.sprite(1576,600,"monsterstimefantasyrpgspritepack_npc6",59)
-                        ];
-                        this.characters[0].setDepth(3);
-                        this.characters[1].setDepth(3);
-                        this.characters[2].setDepth(3);
-                        this.characters[3].setDepth(3);
-                        this.characters[0].dialogue = ["Bonjour jeune etranger.","hohoho","Bonne soirée!"];
-                        this.characters[1].dialogue = ["Vous n'êtes pas d'ici je me trompe?"];
-                        this.characters[2].dialogue = ["Bienvenue au village !"];
-                        this.characters[3].dialogue = ["hohoho"];
+
+                        // this.characters = [
+                        //             this.physics.add.sprite(1078,879,"monsterstimefantasyrpgspritepack_npc6",8),
+                        //             this.physics.add.sprite(925,495,"monsterstimefantasyrpgspritepack_npc4",2),
+                        //             this.physics.add.sprite(951,1117,"monsterstimefantasyrpgspritepack_npc3",50),
+                        //             this.physics.add.sprite(1576,600,"monsterstimefantasyrpgspritepack_npc6",59)
+                        // ];
+                        // this.characters[0].setDepth(3);
+                        // this.characters[1].setDepth(3);
+                        // this.characters[2].setDepth(3);
+                        // this.characters[3].setDepth(3);
+                        // this.characters[0].dialogue = ["Bonjour jeune etranger.","hohoho","Bonne soirée!"];
+                        // this.characters[1].dialogue = ["Vous n'êtes pas d'ici je me trompe?"];
+                        // this.characters[2].dialogue = ["Bienvenue au village !"];
+                        // this.characters[3].dialogue = ["hohoho"];
+
+                        this.characters = this.physics.add.group();
+                        
+                        this.characters.create(1078,879,"monsterstimefantasyrpgspritepack_npc6",8);
+                        this.characters.create(925,495,"monsterstimefantasyrpgspritepack_npc4",2);
+                        this.characters.create(951,1117,"monsterstimefantasyrpgspritepack_npc3",50);
+                        this.characters.create(1576,600,"monsterstimefantasyrpgspritepack_npc6",59);
+
+                        var char = this.characters.getChildren();
+                        this.characters.setDepth(3);
+                        for(let i = 0 ; i < this.characters.getLength(); i++ ){
+                                    switch (i){
+                                                case 0:
+                                                char[i].dialogue = ["Bonjour jeune etranger.","hohoho","Bonne soirée!"];
+                                                break;
+                                                case 1:
+                                                char[i].dialogue = ["Vous n'êtes pas d'ici je me trompe?"];
+                                                break;
+                                                case 2:
+                                                char[i].dialogue = ["Bienvenue au village !"];
+                                                break;
+                                                case 3:
+                                                char[i].dialogue = ["Bonjour"];
+                                                break;
+                                                default:
+                                                break;
+                                    }
+                        }
+
 
                         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
@@ -99,11 +129,11 @@ export default class MapVillage01  extends Phaser.Scene {
                                  console.log("widthCamera= " + this.cameras.main.width + " heightCamera= " + this.cameras.main.height);
                                  this.debugText={
                                              heroPositionX:this.add.text(this.gameManager.CAM_X,
-                                                                         this.gameManager.CAM_Y,"position X hero: " + this.hero.x,{ color: '#ffffff', fontSize:10, fontFamily: "Gadugi"}),
+                                                                         this.gameManager.CAM_Y,"position X hero: " + this.hero.x,{ color: '#ffffff', fontSize:10, fontFamily: "Gadugi,Georgia, serif"}),
                                              heroPositionY:this.add.text(this.gameManager.CAM_X,
-                                                                         this.gameManager.CAM_Y + 20,"position Y hero: " + this.hero.y,{ color: '#ffffff', fontSize:10, fontFamily: "Gadugi"}),
+                                                                         this.gameManager.CAM_Y + 20,"position Y hero: " + this.hero.y,{ color: '#ffffff', fontSize:10, fontFamily: "Gadugi,Georgia, serif"}),
                                              information:this.add.text(  this.gameManager.CAM_X,
-                                                                         this.gameManager.CAM_Y + 40,"click 'C' for debug tile : " + this.showDebug,{ color: '#ffffff', fontSize:10,fontFamily: "Gadugi"})
+                                                                         this.gameManager.CAM_Y + 40,"click 'C' for debug tile : " + this.showDebug,{ color: '#ffffff', fontSize:10,fontFamily: "Gadugi,Georgia, serif"})
                                  };
                                  this.debugText.heroPositionX.setDepth(999);
                                  this.debugText.heroPositionY.setDepth(999);
@@ -118,29 +148,25 @@ export default class MapVillage01  extends Phaser.Scene {
                                  this.debugText.information.setScale(1);
                                  this.debugText.information.setScrollFactor(0);
 
+                                 this.debugText.heroPositionX.setVisible(false);
+                                 this.debugText.heroPositionY.setVisible(false);
+                                 this.debugText.information.setVisible(false);
+
                                  this.debugGraphics = this.add.graphics();
                                  this.input.keyboard.on('keydown_C', function (event) {
                                        this.showDebug = !this.showDebug;
                                        this.drawDebug();
                            },this);
 
-                           this.physics.add.overlap(this.hero,this.characters[0],function(e1, e2){
-
+                           this.physics.add.overlap(this.hero,this.characters,function(e1, e2){
 
                                        if(Phaser.Input.Keyboard.JustDown(this.spacekey) ) {
                                                    this.showDialogueBox = (this.dialogueIteration>=e2.dialogue.length?false:true);
-                                                   console.log("taille tableau dialogue = "+e2.dialogue.length);
-                                                   console.log("iteration= " + this.dialogueIteration);
-                                                   console.log("condition dialogue: " + (this.dialogueIteration>e2.dialogue.length) ) ;
-                                                   console.log("valeur showDialogueBox: " + this.showDialogueBox);
                                                    if(this.showDialogueBox === true){
-                                                               console.log("enable dialogueBox");
                                                                this.dialogueBox.setVisible(true);
-                                                               console.log(e2.dialogue[this.dialogueIteration]);
                                                                this.dialogueText.setText(e2.dialogue[this.dialogueIteration]);
                                                                this.dialogueText.setVisible(true);
                                                    }else{
-                                                               console.log("disable dialogueBox" + " valeur iteration = " + this.dialogueIteration);
                                                                this.dialogueBox.setVisible(false);
                                                                this.dialogueText.setVisible(false);
                                                                this.dialogueIteration = 0;
@@ -247,6 +273,5 @@ export default class MapVillage01  extends Phaser.Scene {
                         this.map.setCollision(this.layer_collision.tilemap.tilesets[9].firstgid);
                         this.physics.world.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels);
             }
-
 
 }

@@ -99,12 +99,23 @@ export default class Boot extends Phaser.Scene {
                         this.load.image('battleScene_timeBar','assets/gui/battleScene_timeBar.png');
                         this.load.image('battleScene_timeBar2','assets/gui/battleScene_timeBar2.png');
                         this.load.image('battleScene_timeBarEmpty','assets/gui/battleScene_timeBarEmpty.png');
+                        this.load.image('battleScene_BarEmpty2','assets/gui/battleScene_BarEmpty2.png');
                         this.load.image('battleScene_UIINFO','assets/gui/battleScene_UIINFO.png');
                         this.load.image('battleScene_UIINFO2','assets/gui/battleScene_UIINFO2.png');
                         this.load.image('battleScene_UIINFO3','assets/gui/battleScene_UIINFO3.png');
                         this.load.image('battleScene_UIINFO4','assets/gui/battleScene_UIINFO4.png');
+                        this.load.image('battleScene_UIINFO5','assets/gui/battleScene_UIINFO5.png');
+
                         this.load.image('battleScene_BarEmpty','assets/gui/battleScene_BarEmpty.png');
                         this.load.image('dialogueBox','assets/gui/dialogueBox.png');
+                        this.load.image('gameOver','assets/sprites/gameover.png');
+
+                        //faceset
+                        this.load.image('faceset_paladin','assets/sprites/faceset_paladin.png');
+
+                        //gui
+                        this.load.image('_sheet_window_06','assets/gui/_sheet_window_06.png');
+                        this.load.image('_sheet_window_06-alpha','assets/gui/_sheet_window_06-alpha.png');
 
                         //gui menu
                         this.load.image('newgame_normal','assets/gui/newgame_normal.png');

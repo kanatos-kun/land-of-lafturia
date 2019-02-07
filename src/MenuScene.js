@@ -8,46 +8,34 @@ export default class MenuScene  extends Phaser.Scene {
                         this.gameManager;
                         this.newGameButton;
                         this.continueButton;
+                        // this.tweenEXP;
             }
 
             create(){
                         this.gameManager = this.game.manager;
-                        keys = this.input.keyboard.addKeys( this.gameManager.setKey() );
 
+                        this.tweenEXP = this.tweens.addCounter({
+                                    duration:10000,
+                                    ease:"Circ.easeIn",
+                                    from:15,
+                                    to:8000000,
+                                    paused: true
+
+                        });
+
+                        keys = this.input.keyboard.addKeys( this.gameManager.setKey() );
+                  //       this.add.nineslice(
+                  //             110, 110,   // this is the starting x/y location
+                  //             100, 100,   // the width and height of your object
+                  //             '_sheet_window_06', // a key to an already loaded image
+                  //             6         // the width and height to offset for a corner slice
+                  //             //6          // (optional) pixels to offset when computing the safe usage area
+                  // ).setScale(2);
                         this.currentOption = 0;
                         console.log(Phaser.Input.Keyboard.KeyCodes);
                         console.log("la scene MenuScene a bien été chargée");
                         this.newGameButton = this.add.image(180,90,'newgame_normal').setInteractive();
                         this.continueButton = this.add.image(180,130,'continue_normal').setInteractive();
-
-
-                        // newGameButton.on('pointerover',function(){
-                        //             this.setTexture('newgame_hover');
-                        // });
-                        // newGameButton.on('pointerout',function(){
-                        //             this.setTexture('newgame_normal');
-                        // });
-                        // newGameButton.on('pointerup',function(event){
-                        //             if(event.buttons === 1){
-                        //                newGameButton.setTexture('newgame_click');
-                        //                this.gameManager = this.game.manager;
-                        //                this.gameManager.setWarpPosition("TP:spawnPoint");
-                        //                this.scene.start('GamePrototype');
-                        //             }
-                        // },this);
-                        //
-                        // continueButton.on('pointerover',function(){
-                        //             this.setTexture('continue_hover');
-                        // });
-                        // continueButton.on('pointerout',function(){
-                        //             this.setTexture('continue_normal');
-                        // });
-                        // continueButton.on('pointerup',function(event){
-                        //             if(event.buttons === 1){
-                        //                this.setTexture('continue_click');
-                        //             }
-                        // },this);
-
             }
 
             update(){
@@ -68,10 +56,15 @@ export default class MenuScene  extends Phaser.Scene {
 
                         if(Phaser.Input.Keyboard.JustDown(keys.SPACE) ){
                                     if(this.currentOption === 0){
-                                                this.gameManager.setWarpPosition("TP:spawnPoint");
+                                                //reset la base de donnée
+                                                this.gameManager.setDB();
+                                                // this.gameManager.heros = [ Object.create(this.gameManager.heroDB[0]) ];
+                                                this.gameManager.setWarpPosition("TP:village01>map_forest01");
                                                 this.scene.start(this.gameManager.location);
                                                 // this.scene.start("map_village01");
-                                                // this.scene.start("BattleScene",{monster:[0,0,0]});
+                                                // this.scene.start("BattleScene",{monster:[
+                                                //             this.gameManager.monsterDB[0]
+                                                //             ]});
                                     }
                         }
 
@@ -85,6 +78,20 @@ export default class MenuScene  extends Phaser.Scene {
                                     this.continueButton.setTexture('continue_hover');
                         }else{
                                     this.continueButton.setTexture('continue_normal');
+                        }
+
+                        if(Phaser.Input.Keyboard.JustDown(keys.T) ){
+                                    this.tweenEXP.play();
+                        }
+
+                        if(this.tweenEXP.isPlaying() ){
+                                    // console.log(this.tweenEXP.totalElapsed);
+                                    if((this.tweenEXP.totalElapsed % 100)>=90 ){
+                                                var value = Phaser.Math.FloorTo(this.tweenEXP.getValue() );
+                                                console.log(value);
+                                                // console.log(this.tweenEXP.totalElapsed % 100);
+
+                                    }
                         }
             }
 
