@@ -5,7 +5,7 @@ import Boot from './scenes/Boot';
 import MenuManager from './scenes/MenuManager';
 import SceneManager from './scenes/SceneManager';
 import MapManager from './scenes/MapManager';
-import MenuScene from './MenuScene';
+import MenuScene from './scenes/MenuScene';
 import GameManager from './GameManager';
 import BattleScene from './scenes/BattleScene';
 import GameOverScene from './scenes/GameOverScene';
@@ -14,8 +14,17 @@ import BattleSceneVictory from './scenes/BattleSceneVictory';
 // -----------------------------------------
 //               IMPORTS MAP
 // -----------------------------------------
-import Mapvillage01 from './map/village01';
-import MapForest01 from './map/forest01';
+import Map_Village01 from './map/Map_Village01';
+import Map_Village01_test from './map/Map_Village01_test';
+import Map_Forest01 from './map/Map_Forest01';
+import Map_Forest01_test from './map/Map_Forest01_test';
+import Map_Worldmap from './map/Map_Worldmap';
+import Map_Castle1 from './map/Map_Castle1';
+import Map_VillageCastle1 from './map/Map_VillageCastle1';
+import Map_Castle1_inside1 from './map/Map_Castle1_inside1';
+import Map_Castle1_inside2 from './map/Map_Castle1_inside2';
+
+
 
 var keys;
 var config = {
@@ -37,8 +46,15 @@ var config = {
             GameOverScene,
             BattleSceneVictory,
             //-----map-----
-            Mapvillage01,
-            MapForest01
+            Map_Village01,
+            Map_Village01_test,
+            Map_Forest01,
+            Map_Forest01_test,
+            Map_Worldmap,
+            Map_Castle1,
+            Map_Castle1_inside1,
+            Map_Castle1_inside2,
+            Map_VillageCastle1
 ],
 physics: {
     default: 'arcade',

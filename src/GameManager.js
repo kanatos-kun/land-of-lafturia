@@ -24,7 +24,8 @@ export default class GameManager extends Phaser.Scene{
                                     {
                                                 name: "Max",
                                                 level: 1,
-                                                experience:[ 292 ,
+                                                experience:[
+                                                292 ,
                                                 1358 ,
                                                 3225 ,
                                                 5892 ,
@@ -176,20 +177,101 @@ export default class GameManager extends Phaser.Scene{
                         this.CAM_X = posX / 4;
                         this.CAM_Y = posY / 4;
             }
-            setWarpPosition(strName){
-                        if(strName ==="TP:village01>map_forest01"){
-                                    this.location="map_forest01",
-                                    this.heroPosition.x = 621;
-                                    this.heroPosition.y = 1100;
-                        }else if(strName ==="TP:map_forest01>village01"){
-                                    this.location = "map_village01";
-                                    this.heroPosition.x = 882;
-                                    this.heroPosition.y = 46;
-                        }else if(strName ==="TP:spawnPoint"){
-                                    this.location = "map_village01";
-                                    this.heroPosition.x = 1254;
-                                    this.heroPosition.y = 842;
-                        }
+            setWarpPosition(x, y, name){
+                        this.location = name;
+                        this.heroPosition.x = x;
+                        this.heroPosition.y = y;
+                        // if(strName ==="TP:village01>map_forest01"){
+                        //             this.location="map_forest01",
+                        //             this.heroPosition.x = 621;
+                        //             this.heroPosition.y = 1100;
+                        // }else if(strName ==="TP:map_forest01>village01"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 882;
+                        //             this.heroPosition.y = 46;
+                        // }else if(strName ==="TP:spawnPoint"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 1254;
+                        //             this.heroPosition.y = 842;
+                        //
+                        // //village01 exterior>interior
+                        // }else if(strName ==="TP:village01>village01_interior1"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 44;
+                        //             this.heroPosition.y = 238;
+                        // }else if(strName ==="TP:village01>village01_interior2"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 64;
+                        //             this.heroPosition.y = 234;
+                        // }else if(strName ==="TP:village01>village01_interior3(1)"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 66;
+                        //             this.heroPosition.y = 238;
+                        // }else if(strName ==="TP:village01>village01_interior3(2)"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 26;
+                        //             this.heroPosition.y = 131;
+                        // }else if(strName ==="TP:village01>village01_shop"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 79;
+                        //             this.heroPosition.y = 201;
+                        // }else if(strName ==="TP:village01>village01_interior4"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 94;
+                        //             this.heroPosition.y = 202;
+                        // }else if(strName ==="TP:village01>village01_interior5"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 48;
+                        //             this.heroPosition.y = 219;
+                        // }else if(strName ==="TP:village01>village01_interior6"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 44;
+                        //             this.heroPosition.y = 204;
+                        //
+                        // //village01 interior
+                        // }else if(strName ==="TP:village01_interior1>village01"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 1511;
+                        //             this.heroPosition.y = 571;
+                        // }else if(strName ==="TP:village01_shop>village01"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 988;
+                        //             this.heroPosition.y = 474;
+                        // }else if(strName ==="TP:village01_interior2>village01"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 1412;
+                        //             this.heroPosition.y = 904;
+                        // }else if(strName ==="TP:village01_interior3>village01(2)"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 1082;
+                        //             this.heroPosition.y = 809;
+                        // }else if(strName ==="TP:village01_interior3>village01(1)"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 1045;
+                        //             this.heroPosition.y = 777;
+                        // }else if(strName ==="TP:village01_interior4>village01_interior4-1"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 278;
+                        //             this.heroPosition.y = 215;
+                        // }else if(strName ==="TP:village01_interior4>village01"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 555;
+                        //             this.heroPosition.y = 507;
+                        // }else if(strName ==="TP:village01_interior4-1>village01_interior4"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 27;
+                        //             this.heroPosition.y = 141;
+                        // }else if(strName ==="TP:village01_interior5>village01"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 569;
+                        //             this.heroPosition.y = 776;
+                        // }else if(strName ==="TP:village01_interior6>village01"){
+                        //             this.location = "map_village01";
+                        //             this.heroPosition.x = 247;
+                        //             this.heroPosition.y = 732;
+                        // }
+
+
             }
             setKey(){
                         return 'UP,'    +
@@ -200,6 +282,9 @@ export default class GameManager extends Phaser.Scene{
                                // rajouter les touches ici
                                //-------------------------
                                'T,' +
+                               'C,' +
+                               'MINUS,'+
+                               'PLUS,'+
                                //-------------------------
                                'SPACE';
             }

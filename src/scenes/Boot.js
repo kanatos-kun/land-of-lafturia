@@ -6,11 +6,13 @@ export default class Boot extends Phaser.Scene {
             preload(){
                         var game = this;
 // ------------------------------------------------------------------------
-//                              CHARGEMENT FILES
+//                              LOADING FILES
 // ------------------------------------------------------------------------
 
                         //spritesheet files
                         this.load.image('logo','assets/sprites/logo.png');
+                        this.load.image('menuScene','assets/sprites/menuScene2.png');
+
                         //monstertimefantasy spritesheet
                         this.load.spritesheet('monsterstimefantasyrpgspritepack_monster1','assets/atlas/monsterstimefantasyrpgspritepack/monster1.png',{
                                     frameWidth:62,
@@ -25,6 +27,10 @@ export default class Boot extends Phaser.Scene {
                                     frameHeight:36
                         });
                         this.load.spritesheet('monsterstimefantasyrpgspritepack_chara7','assets/atlas/monsterstimefantasyrpgspritepack/chara7.png',{
+                                    frameWidth:26,
+                                    frameHeight:36
+                        });
+                        this.load.spritesheet('monsterstimefantasyrpgspritepack_chara8','assets/atlas/monsterstimefantasyrpgspritepack/chara8.png',{
                                     frameWidth:26,
                                     frameHeight:36
                         });
@@ -76,6 +82,26 @@ export default class Boot extends Phaser.Scene {
                                     frameWidth:26,
                                     frameHeight:36
                         });
+                        this.load.spritesheet('over80characterswithanimations_animals1','assets/atlas/over80characterwithanimation/animals1.png',{
+                                    frameWidth:26,
+                                    frameHeight:36
+                        });
+                        this.load.spritesheet('over80characterswithanimations_chara2','assets/atlas/over80characterwithanimation/chara2.png',{
+                                    frameWidth:26,
+                                    frameHeight:36
+                        });
+                        this.load.spritesheet('over80characterswithanimations_military1','assets/atlas/over80characterwithanimation/military1.png',{
+                                    frameWidth:26,
+                                    frameHeight:36
+                        });
+                        this.load.spritesheet('over80characterswithanimations_military2','assets/atlas/over80characterwithanimation/military2.png',{
+                                    frameWidth:26,
+                                    frameHeight:36
+                        });
+                        this.load.spritesheet('over80characterswithanimations_military3','assets/atlas/over80characterwithanimation/military3.png',{
+                                    frameWidth:26,
+                                    frameHeight:36
+                        });
                         //superpower spritesheet
                         this.load.spritesheet('superpower_rpg-battle-system_paladin','assets/atlas/superpower_rpg-battle-system/char/paladin/sprite-sheet-249x100.png',{
                                     frameWidth:249,
@@ -88,25 +114,19 @@ export default class Boot extends Phaser.Scene {
 
                         //sprite
                         this.load.image('tp_image','assets/sprites/15-01-19_tpIcon.png');
+                        this.load.image('collision_image','assets/sprites/collision.png');
+                        this.load.spritesheet('gid','assets/atlas/gid.png',{
+                                    frameWidth:16,
+                                    frameHeight:16
+                        });
 
                         this.load.image('battleScene_BG','assets/sprites/battleScene_BG.png');
-                        this.load.image('battleScene_healthBar','assets/gui/battleScene_healthBar.png');
                         this.load.image('battleScene_healthBar2','assets/gui/battleScene_healthBar2.png');
-                        this.load.image('battleScene_healthBarEmpty','assets/gui/battleScene_healthBarEmpty.png');
-                        this.load.image('battleScene_manaBar','assets/gui/battleScene_manaBar.png');
                         this.load.image('battleScene_manaBar2','assets/gui/battleScene_manaBar2.png');
-                        this.load.image('battleScene_manaBarEmpty','assets/gui/battleScene_manaBarEmpty.png');
-                        this.load.image('battleScene_timeBar','assets/gui/battleScene_timeBar.png');
                         this.load.image('battleScene_timeBar2','assets/gui/battleScene_timeBar2.png');
-                        this.load.image('battleScene_timeBarEmpty','assets/gui/battleScene_timeBarEmpty.png');
                         this.load.image('battleScene_BarEmpty2','assets/gui/battleScene_BarEmpty2.png');
-                        this.load.image('battleScene_UIINFO','assets/gui/battleScene_UIINFO.png');
-                        this.load.image('battleScene_UIINFO2','assets/gui/battleScene_UIINFO2.png');
-                        this.load.image('battleScene_UIINFO3','assets/gui/battleScene_UIINFO3.png');
-                        this.load.image('battleScene_UIINFO4','assets/gui/battleScene_UIINFO4.png');
                         this.load.image('battleScene_UIINFO5','assets/gui/battleScene_UIINFO5.png');
 
-                        this.load.image('battleScene_BarEmpty','assets/gui/battleScene_BarEmpty.png');
                         this.load.image('dialogueBox','assets/gui/dialogueBox.png');
                         this.load.image('gameOver','assets/sprites/gameover.png');
 
@@ -154,8 +174,11 @@ export default class Boot extends Phaser.Scene {
                         //map
                         this.load.tilemapTiledJSON('map_village','assets/data/map/0003 - village01.json');
                         this.load.tilemapTiledJSON('map_forest01','assets/data/map/0004 - forest01.json');
-
-
+                        this.load.tilemapTiledJSON('map_castle1','assets/data/map/0013 -castle1.json');
+                        this.load.tilemapTiledJSON('map_village_castle1','assets/data/map/0014 -village_castle1.json');
+                        this.load.tilemapTiledJSON('map_worldmap','assets/data/map/10001 - worldmap.json');
+                        this.load.tilemapTiledJSON('map_castle1_inside1','assets/data/map/0015 -castle1-inside1.json');
+                        this.load.tilemapTiledJSON('map_castle1_inside2','assets/data/map/0016 -castle1-inside2.json');
 
 
                         //bge files
@@ -169,6 +192,9 @@ export default class Boot extends Phaser.Scene {
                         this.load.audio('bgm_music_calm_green_lake_serenade','assets/bgm/prosoundcollection/music_calm_green_lake_serenade.wav');
                         this.load.audio('bgm_music_calm_tree_of_life','assets/bgm/prosoundcollection/music_calm_tree_of_life.wav');
                         this.load.audio('bgm_music_harp_peaceful_loop','assets/bgm/prosoundcollection/music_harp_peaceful_loop.wav');
+
+                        //script
+                        this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
 
 
 // ------------------------------------------------------------------------
@@ -197,11 +223,103 @@ var progress= this.add.graphics();
 
             create(){
                         console.log("la scene Boot a bien été chargée");
-
+                        this.setAnimation();
+                        WebFont.load({
+                           custom: {
+                                families: [ 'troika', 'Caroni', 'Gadugi' ]
+                           }
+                        });
                         var m = this.sound.add('bgm_music_bytes_the_retro_adventure',{loop:true});
                         this.add.image(0,0,'monsterstimefantasyrpgspritepack_animation3');
                         m.play();
                         m.stop();
                         this.scene.start('MenuScene');
+            }
+
+            setAnimation(){
+                        this.anims.create({
+                                    key:"chara6_1_walk_front",
+                                    frames: [
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:0,
+                                                duration:100
+                                                },
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:1,
+                                                duration:100
+                                                },
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:2,
+                                                duration:100
+                                                }
+                                    ],
+                                    repeat: -1
+                        })
+                        this.anims.create({
+                                    key:"chara6_1_walk_back",
+                                    frames: [
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:36,
+                                                duration:100
+                                                },
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:37,
+                                                duration:100
+                                                },
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:38,
+                                                duration:100
+                                                }
+                                    ],
+                                    repeat: -1
+                        })
+                        this.anims.create({
+                                    key:"chara6_1_walk_right",
+                                    frames: [
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:24,
+                                                duration:100
+                                                },
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:25,
+                                                duration:100
+                                                },
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:26,
+                                                duration:100
+                                                }
+                                    ],
+                                    repeat: -1
+                        })
+                        this.anims.create({
+                                    key:"chara6_1_walk_left",
+                                    frames: [
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:12,
+                                                duration:100
+                                                },
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:13,
+                                                duration:100
+                                                },
+                                                {
+                                                key:"monsterstimefantasyrpgspritepack_chara6",
+                                                frame:14,
+                                                duration:100
+                                                }
+                                    ],
+                                    repeat: -1
+                        })
             }
 }

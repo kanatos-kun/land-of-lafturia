@@ -1,0 +1,12 @@
+@font-face{
+            font-family:Gadugi;
+            src:url(assets/fonts/gadugi.ttf);
+}
+@font-face{
+            font-family: troika;
+            src: url(assets/fonts/troika.otf) format(opentype);
+}
+@font-face{
+            font-family: Caroni;
+            src: url(assets/fonts/Caroni-Regular.otf) format(opentype);
+}
